@@ -20,8 +20,7 @@ sequenceDiagram
        alt Classification confidence is high
            L->>A2: Search for similar real news
            A2->>L: Return similar news articles
-           L->>A1: Reverify authenticity with additional context
-           A1->>L: Updated classification result
+           L->>L: Updated classification result
        else Classification confidence is low
            L->>U: Request more information or rephrase the query
            U->>L: Provide additional context or rephrased query
