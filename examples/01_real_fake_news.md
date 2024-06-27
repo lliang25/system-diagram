@@ -2,26 +2,32 @@
 
 ```mermaid
 sequenceDiagram
+   participant S as Start
+   participant SRC as Source
+   participant U as User
+   participant L as LLM
+   participant A1 as Classifier Agent
+   participant A2 as Search Agent
+   participant ED as End
 
-    participant S as Start
-    participant SRC as Source
-    participant U as User
-    participant L as LLM
-    participant A1 as CLF Agent
-    participant A2 as Search Agent
-    participant ED as End
 
-    S->>SRC: Start the program
-    SRC->>U: Input: "News blah blah told us to vote for John Doe"
-    U->>L: Check if this is real or not
-    loop self correction cycle
-        L->>A1: Call agent (agent is a classifier)
-        A1->>L: Dictionary object: {"LABEL": "1", "Score": 0.999}
-        L->>A2: Grab similar but real news (TODO: require defn / threshold)
-        A2->>A1: Verify again whether it's real or not (TODO: require threshold)
-    end
-    A1->>L: This is real news
-    L->>U: Check this out
-    U->>ED: Finish the program
-
+   S->>SRC: Start the program
+   SRC->>U: Get input: "News blah blah told us to vote for John Doe"
+   U->>L: Verify authenticity of the news
+   loop Self-correction cycle
+       L->>A1: Classify the statement
+       A1->>L: {"LABEL": "1", "Score": 0.999}
+       alt Classification confidence is high
+           L->>A2: Search for similar real news
+           A2->>L: Return similar news articles
+           L->>A1: Reverify authenticity with additional context
+           A1->>L: Updated classification result
+       else Classification confidence is low
+           L->>U: Request more information or rephrase the query
+           U->>L: Provide additional context or rephrased query
+       end
+   end
+   A1->>L: Final verification result
+   L->>U: Provide verification result
+   U->>ED: Finish the program
 ```
