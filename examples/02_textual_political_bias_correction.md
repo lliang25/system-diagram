@@ -15,7 +15,7 @@ sequenceDiagram
     SRC->>U: User reads it and thinks...
     U->>L: I have some texts
     L->>A1: Provide text
-    A1->>L: Resp: Left/Neural/Right
+    A1->>L: Resp: Left...%....Right
     L->>U: Say: Neural OR Left/Right/Do you want to change it?
     U->>L: Change one sentence/some/all of it.
     L->>A2: Rewrite it
