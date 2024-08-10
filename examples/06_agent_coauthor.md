@@ -15,7 +15,7 @@ sequenceDiagram
 
   loop domain enhanced AI agent
     loop discussion with AI agent
-      U->>L: Ask for help of certain scenes
+      U->>L: Ask for help of certain scenes (with images if needed)
       L->>U: Certain description of scenes
     end
   
